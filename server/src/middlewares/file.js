@@ -6,8 +6,7 @@
 
 import multer, { diskStorage } from 'multer';
 
-const PATH_STORAGE = `${process.cwd()}/storage`;
-
+const PATH_STORAGE = `${process.cwd()}/src/storage`;
 const storage = diskStorage({
     destination(req, file, cb) {
         cb(null, PATH_STORAGE);

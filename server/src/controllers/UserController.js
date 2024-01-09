@@ -65,7 +65,7 @@ class UserController {
 
         return res 
             .status(200)
-            .json({ response:'SUCCESS_CREATE_ADMIN' });
+            .json({ response:'SUCCESS_CREATE_TEACHER' });
     }
 
     async UpdatePassword(req, res) {

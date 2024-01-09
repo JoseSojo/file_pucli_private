@@ -15,7 +15,7 @@ export const InicioDirect = () => {
     return (
         <section className='grid grid-cols-[.5fr_1fr] grid-rows-4 p-5 gap-5'>
             <StructureCardIndex setSecction={setSecction} title="Personal" valueScction="PERSONAL" />
-            <div className='row-span-4'>
+            <div className='row-span-4 relative'>
                 <CardFull>
                     { secction == 'ACTIVITIES' && <ShowActivities /> }
                     { secction == 'PERSONAL' && <FormCreatePeople /> }

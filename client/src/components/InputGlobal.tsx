@@ -4,7 +4,7 @@ import { FC } from "react"
 
 interface Props {
     change: any,
-    type: 'email' | 'password' | 'text' | 'radio' | 'checkbox',
+    type: 'email' | 'password' | 'text' | 'radio' | 'checkbox' | 'file',
     placeholder: string,
     value: string | number,
     error: string | null,

@@ -11,7 +11,7 @@ export const Notification = () => {
     }, [])
 
     return (
-        <aside className='bottom-10 absolute right-10 w-auto bg-white rounded-lg shadow-lg text-nowrap'>
+        <aside className='bottom-10 absolute right-10 w-auto bg-white rounded-lg shadow-lg text-nowrap z-50'>
             <div className='w-full h-full px-12 py-4 relative'>
                 <span 
                     className={`

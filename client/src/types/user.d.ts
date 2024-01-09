@@ -8,3 +8,10 @@ export interface User {
     lastname: string,
     role_id: 1,
 }
+
+export interface CreateAdmin {
+    name: string,
+    lastname: string,
+    ci: string,
+    email: string
+}

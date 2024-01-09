@@ -2,14 +2,19 @@ import { useState } from "react"
 import { InicioDirect } from "../../components/private/InicioDirect";
 import { FilesDirect } from "../../components/private/FilesDirect";
 import { PersonalDirect } from "../../components/private/PersonalDirect";
+import { useNotification } from "../../context/NotiContext";
+import { Notification } from "../../components/Notification";
 
 type PagesPayload = 'INICIO' | 'FILES' | 'PERSONAL'
 
 export const DirectPage = () => {
     const [payload, setPayload] = useState<PagesPayload>('INICIO');
+    const noti = useNotification();
+    console.log(noti.notification.status);
 
     return (
         <>
+            { noti.notification.status && <Notification /> }
             <header className='w-full px-10 bg-amber-300 flex justify-between items-center'>
                 <h1 className='text-2xl font-bold'>Juan German Roscio</h1>
 
