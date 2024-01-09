@@ -23,7 +23,6 @@ function App() {
       window.removeEventListener(NAVIGATION_EVENT, onLocationChange);
       window.removeEventListener('popstate', onLocationChange);
     }
-
   }, [])
 
 
@@ -32,12 +31,13 @@ function App() {
       <Layout>
         { currentPath == '/login' && <LoginPage /> }
         { currentPath == '/contact/admin' && <ContactAdmin />  }         
+      
+        <>
+          { currentPath == '/dashboard/direct' && <DirectPage /> }
+          { currentPath == '/dashboard/admin' && <AdminPage /> }
+          { currentPath == '/dashboard/teacher' && <TeacherPage /> }
+        </>
       </Layout>
-      <>
-        { currentPath == '/dashboard/direct' && <DirectPage /> }
-        { currentPath == '/dashboard/admin' && <AdminPage /> }
-        { currentPath == '/dashboard/teacher' && <TeacherPage /> }
-      </>
     </>
   )
 }

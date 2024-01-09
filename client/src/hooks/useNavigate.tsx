@@ -1,4 +1,4 @@
-import { NAVIGATION_EVENT } from "../constans";
+import { NAVIGATION_EVENT } from "../constans.d";
 
 export const Navigate = (href: string) => {
     window.history.pushState({}, '', href);
