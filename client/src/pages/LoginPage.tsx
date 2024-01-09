@@ -2,8 +2,10 @@ import { FormEvent, useState } from "react";
 import { CardBasic } from "../components/CardBasic";
 import { InputDefine } from "../components/InputGlobal";
 import { OpacityText } from "../components/text/OpacityText";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useNotification } from "../context/NotiContext";
+import { Navigate } from '../hooks/useNavigate';
+
 
 import ServiceAuth from '../service/ServiceAuth';
 import { useAuth } from "../context/AuthContext";
@@ -11,7 +13,6 @@ import { useAuth } from "../context/AuthContext";
 export const LoginPage = () => {
     const noti = useNotification();
     const auth = useAuth();
-    const navigate = useNavigate();
 
     const [error, setError] = useState<{ ubication:string|null, error:string|null }>({ ubication:null, error:null });
     const [load, setLoad] = useState<string|null>(null);
@@ -34,9 +35,9 @@ export const LoginPage = () => {
             setLoad(null);
 
             auth.setSession(true);
-            if(response === '1') navigate('/dashboard/direct');
-            if(response === '2') navigate('/dashboard/admin');
-            if(response === '3') navigate('/dashboard/teacher');
+            if(response === '1') Navigate('/dashboard/direct');
+            if(response === '2') Navigate('/dashboard/admin');
+            if(response === '3') Navigate('/dashboard/teacher');
 
         } catch (error) {
             setError({ ubication:'global', error:'Error temporal' });

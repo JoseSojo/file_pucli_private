@@ -1,5 +1,3 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-// import { useAuth } from "./context/AuthContext";
 import { Layout } from "./layout/Layout";
 import { LoginPage } from "./pages/LoginPage";
 import { ContactAdmin } from "./pages/ContactAdmin";
@@ -7,7 +5,7 @@ import { AdminPage } from "./pages/private/AdminPage";
 import { DirectPage } from "./pages/private/DirectPage";
 import { TeacherPage } from "./pages/private/TeacherPage";
 import { useEffect, useState } from "react";
-import { NAVIGATION_EVENT } from "./constans";
+import { NAVIGATION_EVENT } from "./constans.d";
 
 function App() {
   const [currentPath, setCurrentPath] = useState(window.location.pathname);
