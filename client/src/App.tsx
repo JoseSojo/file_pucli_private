@@ -6,6 +6,7 @@ import { DirectPage } from "./pages/private/DirectPage";
 import { TeacherPage } from "./pages/private/TeacherPage";
 import { useEffect, useState } from "react";
 import { NAVIGATION_EVENT } from "./constans.d";
+import { IndexPage } from "./pages/IndexPage";
 
 function App() {
   const [currentPath, setCurrentPath] = useState(window.location.pathname);
@@ -29,14 +30,12 @@ function App() {
   return (
     <>
       <Layout>
-        { currentPath == '/login' && <LoginPage /> }
-        { currentPath == '/contact/admin' && <ContactAdmin />  }         
-      
-        <>
-          { currentPath == '/dashboard/direct' && <DirectPage /> }
-          { currentPath == '/dashboard/admin' && <AdminPage /> }
-          { currentPath == '/dashboard/teacher' && <TeacherPage /> }
-        </>
+        { currentPath === '/' && <IndexPage /> }
+        { currentPath === '/login' && <LoginPage /> }
+        { currentPath === '/contact/admin' && <ContactAdmin /> } 
+        { currentPath === '/dashboard/direct' && <DirectPage /> }
+        { currentPath === '/dashboard/admin' && <AdminPage /> }
+        { currentPath === '/dashboard/teacher' && <TeacherPage /> }
       </Layout>
     </>
   )
