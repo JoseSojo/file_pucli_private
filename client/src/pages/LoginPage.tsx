@@ -34,9 +34,7 @@ export const LoginPage = () => {
             setLoad(null);
 
             auth.setSession(true);
-            if(response === '1') Navigate('/dashboard/direct');
-            if(response === '2') Navigate('/dashboard/admin');
-            if(response === '3') Navigate('/dashboard/teacher');
+            return Navigate('/');
 
         } catch (error) {
             setError({ ubication:'global', error:'Error temporal' });
