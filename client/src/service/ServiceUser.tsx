@@ -17,7 +17,7 @@ class Service {
     }
 
     GetUserStorage() {
-        return window.localStorage.getItem('user') as User|null;
+        return JSON.parse(`${window.localStorage.getItem('user')}`) as User|null;
     }
 
     async CreateTeacher({data}:{data:CreateAdmin}): Promise<string> {

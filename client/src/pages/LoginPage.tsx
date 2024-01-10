@@ -52,7 +52,7 @@ export const LoginPage = () => {
                 <CardBasic>
                     <h2 className='font-bold text-3xl text-center mb-5'>Inicia Sesión</h2>
                     <form onSubmit={HandleSubmit} className='grid gap-y-5 mb-7'>
-                        <label className='grid grid-cols-[.5fr_1fr] place-items-center text-lg font-bold font-mono'>
+                        <label className='grid grid-cols-1 lg:grid-cols-[.5fr_1fr] place-items-center text-lg font-bold font-mono'>
                             <span>Correo Electrónico</span>
                             <InputDefine
                                 load={load}
@@ -63,7 +63,7 @@ export const LoginPage = () => {
                                 error={ error.ubication == 'input.email' ? error.error : null }
                                 />
                         </label>
-                        <label className='grid grid-cols-[.5fr_1fr] place-items-center text-lg font-bold font-mono'>
+                        <label className='grid grid-cols-1 lg:grid-cols-[.5fr_1fr] place-items-center text-lg font-bold font-mono'>
                             <span>Contraseña</span>
                             <InputDefine
                                 load={load}
@@ -75,7 +75,7 @@ export const LoginPage = () => {
                                 error={ error.ubication == 'input.password' ? error.error : null }
                                 />
                         </label>
-                        <button className='px-10 py-3 bg-amber-500 hover:bg-amber-400 rounded-lg font-bold text-black w-[30%] mx-auto'>
+                        <button className='w-full lg:px-10 py-3 bg-amber-500 hover:bg-amber-400 rounded-lg font-bold text-black lg:w-[30%] mx-auto'>
                             {
                                 load === 'form.login'
                                 ? 'cargando...'

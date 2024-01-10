@@ -6,7 +6,7 @@ export interface User {
     email: string,
     name: string,
     lastname: string,
-    role_id: 1,
+    role: 'DIRECT'|'TEACHER'|'ADMIN',
 }
 
 export interface CreateAdmin {

@@ -2,7 +2,7 @@ import { Dispatch, FC, SetStateAction } from "react";
 import { CardFull } from "./card/CardFull";
 import { TitleText } from "./text/TitleText";
 
-type SECCTIONS = 'PERSONAL'|'CREAR_FILES'|'VER_FILES'|'ACTIVITIES' 
+type SECCTIONS = 'PERSONAL'|'CREAR_FILES'|'VER_FILES'|'FAVORITES' 
 
 interface Props {
     title: string,

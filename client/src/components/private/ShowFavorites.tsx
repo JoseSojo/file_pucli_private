@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { Post } from "../../types/post.d";
-import IMG from '../../assets/react.svg';
 import { CardFiles } from "../card/CardFiles";
-
+import IMG from '../../assets/react.svg';
 
 const MOCK: Post = {
     creathe_by: 'id user',
@@ -27,12 +26,13 @@ const MOCK: Post = {
     }
 } 
 
-export const ShowFiles = () => {
+export const ShowFavorites = () => {
+
     const [postList] = useState<Post[]>([MOCK])
 
     return (
         <>
-            <section className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lx:grid-cols-4 gap-5'>
+            <section className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 lx:grid-cols-4 gap-5'>
                 {
                     postList.map((item) => ( <CardFiles post={item} /> ))
                 }
