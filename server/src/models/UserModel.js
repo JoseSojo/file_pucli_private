@@ -1,9 +1,8 @@
 import bcrypt from 'bcryptjs';
-import FileSchema from "./FileSchema.js";
-import PostSchema from "./PostSchema.js";
-import AuthSchema from "./AuthSchema.js";
-
-
+import FileSchema from "./schema/FileSchema.js";
+import PostSchema from "./schema/PostSchema.js";
+import AuthSchema from "./schema/AuthSchema.js";
+import favoriteSchema from "./schema/FavoriteSchema.js";
 
 class UserModel {
 
@@ -21,9 +20,25 @@ class UserModel {
         return postResult;
     }
 
-    async GetUser({ id }) {
-        const user = await AuthSchema.findById(id)
-        return user;
+    async CreateFavorite({ data }) {
+
+        const step = await favoriteSchema.findById({ user_id: data.user_id, post_id:data.post_id });
+        console.log(step);
+
+        if(step) {
+            await favoriteSchema.findAndDelete({ user_id: data.user_id, post_id:data.post_id });
+            return 'SUCCESS_FAVORITE_DELETE';
+        } 
+
+        const fav = await new favoriteSchema(data);
+        await fav.save();
+        return 'SUCCESS_FAVORITE_CREATE';
+
+    }
+
+    async GetUser({ query }) {
+        const users = await AuthSchema.find(query)
+        return users;
     }
 
     async UpdatePassword({ data, id }) {

@@ -1,4 +1,4 @@
-import AuthSchema from './AuthSchema.js';
+import AuthSchema from './schema/AuthSchema.js';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 

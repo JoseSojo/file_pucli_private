@@ -31,9 +31,12 @@ app.post('/user/create/file', ValidToken, MulterMiddleware.single('file'), Contr
 app.post('/user/create/post', ValidToken, ControllerUser.CreatePost);
 app.post('/user/create/admin', ValidToken, ControllerUser.CreateAdmin);
 app.post('/user/create/teacher', ValidToken, ControllerUser.CreateTeacher);
+app.post('/user/create/favorite/:id', ValidToken, ControllerUser.CreateFav);
 
-app.post('/user/update/password', ValidToken, ControllerUser.UpdatePassword);
-app.post('/user/update/data', ValidToken, ControllerUser.UpdateData);
+app.get('/user/get/user', ValidToken, ControllerUser.GetAllUser)
+
+app.put('/user/update/password', ValidToken, ControllerUser.UpdatePassword);
+app.put('/user/update/data', ValidToken, ControllerUser.UpdateData);
 
 // STATIC
 app.use('/storage', express.static(path.join(process.cwd(), 'storage')));

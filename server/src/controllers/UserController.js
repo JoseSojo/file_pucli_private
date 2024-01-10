@@ -36,6 +36,20 @@ class UserController {
             })
     }
 
+    async CreateFav(req, res) {
+        const id = req.parmas.id;
+        const uid = req.user.id;
+
+        const DataFav = { user_id: uid, post_id:id };
+        const resultFav = await UserModel.CreateFavorite({ data:DataFav });
+
+        return res 
+            .status(200)
+            .json({
+                response:resultFav
+            })
+    }
+
     async CreateAdmin(req, res) {
         const { email, ci, name, lastname } = req.body;
 
@@ -96,6 +110,37 @@ class UserController {
             .json({ response:'SUCCESS_UPDATE_PASSWORD' });
     }
 
+    async GetAllUser(req, res) {
+        const { role, name, ci, lastname, email } = req.params;
+
+        if(role) {
+            const result = await UserModel.GetUser({ query:{ role:`${role}`} });
+            return res  .status(200).json({ response:'SUCCESS_GET_USER_BY_ROLE', body:result });
+        }
+
+        if(name) {
+            const result = await UserModel.GetUser({ query:{ name:{$regex:`/^${name}/`} } });
+            return res  .status(200).json({ response:'SUCCESS_GET_USER_BY_NAME', body:result });
+        }
+
+        if(lastname) {
+            const result = await UserModel.GetUser({ query:{ lastname:{$regex:`/^${lastname}/`} } });
+            return res  .status(200).json({ response:'SUCCESS_GET_USER_BY_LASTNAME', body:result });
+        }
+
+        if(email) {
+            const result = await UserModel.GetUser({ query:{ email:{$regex:`/^${email}/`} } });
+            return res  .status(200).json({ response:'SUCCESS_GET_USER_BY_EMAIL', body:result });
+        }
+
+        if(ci) {
+            const result = await UserModel.GetUser({ query:{ ci:{$regex:`/^${ci}/`} } });
+            return res  .status(200).json({ response:'SUCCESS_GET_USER_BY_CI', body:result });
+        }
+
+        const result = await UserModel.GetUser({ query:{} });
+        return res  .status(200).json({ response:'SUCCESS_GET_USER_BY_CI', body:result });
+    }
 }
 
 const user = new UserController();

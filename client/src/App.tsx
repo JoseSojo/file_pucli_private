@@ -24,10 +24,7 @@ function App() {
       window.removeEventListener(NAVIGATION_EVENT, onLocationChange);
       window.removeEventListener('popstate', onLocationChange);
     }
-  }, [])
-
-
-  console.log(auth.session, currentPath == '/')
+  }, []);
 
   return (
     <>
