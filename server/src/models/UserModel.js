@@ -5,7 +5,6 @@ import AuthSchema from "./schema/AuthSchema.js";
 import favoriteSchema from "./schema/FavoriteSchema.js";
 
 class UserModel {
-
     async CreateFile({ data }) {
         const file = await new FileSchema(data);
         const fileResult = await file.save();
@@ -56,7 +55,6 @@ class UserModel {
         await AuthSchema.findByIdAndUpdate(id, { $set:data });
         return true;
     }
-
 }
 
 const user = new UserModel();
