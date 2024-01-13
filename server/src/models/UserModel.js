@@ -1,8 +1,8 @@
 import bcrypt from 'bcryptjs';
-import FileSchema from "./schema/FileSchema.js";
-import PostSchema from "./schema/PostSchema.js";
-import AuthSchema from "./schema/AuthSchema.js";
-import favoriteSchema from "./schema/FavoriteSchema.js";
+import FileSchema from "./schemas/FileSchema.js";
+import PostSchema from "./schemas/PostSchema.js";
+import AuthSchema from "./schemas/AuthSchema.js";
+import FavoriteSchema from "./schemas/FavoriteSchema.js";
 
 class UserModel {
     async CreateFile({ data }) {
@@ -20,16 +20,14 @@ class UserModel {
     }
 
     async CreateFavorite({ data }) {
-
-        const step = await favoriteSchema.findById({ user_id: data.user_id, post_id:data.post_id });
-        console.log(step);
+        const step = await FavoriteSchema.findOne({ user_id: data.user_id, post_id:data.post_id });
 
         if(step) {
-            await favoriteSchema.findAndDelete({ user_id: data.user_id, post_id:data.post_id });
+            await FavoriteSchema.deleteMany({ user_id: data.user_id, post_id:data.post_id });
             return 'SUCCESS_FAVORITE_DELETE';
         } 
 
-        const fav = await new favoriteSchema(data);
+        const fav = await new FavoriteSchema(data);
         await fav.save();
         return 'SUCCESS_FAVORITE_CREATE';
 
@@ -38,6 +36,38 @@ class UserModel {
     async GetUser({ query }) {
         const users = await AuthSchema.find(query)
         return users;
+    }
+
+    async GetPost({ query }) {
+        const posts = await PostSchema.aggregate([
+            {$lookup: { from:'files',localField:'file_id',foreignField:'_id',as:'file_reference' }}
+        ]);
+        // const posts = await PostSchema.find().populate('file_id')
+        if(!posts) return null;
+        return posts;
+    }
+
+    async GetPostById({ _id }) {
+        const post = await PostSchema.aggregate([
+            {$lookup: { from:'files',localField:'file_id',foreignField:'_id',as:'file_reference' }},
+            {$match:{_id:_id}},
+            {$limit: 1}
+        ]);
+        if(!post) return null;
+        return post;
+    }
+
+    async GetFavorites({ user_id }) {
+        const favorites = await FavoriteSchema.find({ user_id });
+        if(!favorites) return null;
+        const AllPost = [];
+
+        for (let i = 0; i < favorites.length; i++) {
+            const result = await this.GetPostById({ _id:favorites[i].post_id });
+            AllPost.push(result[0]);         
+        }
+
+        return AllPost;
     }
 
     async UpdatePassword({ data, id }) {

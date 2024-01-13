@@ -17,13 +17,11 @@ export const AlternadeDashboard = () => {
         
     }, []);
 
-    console.log(user?.role);
-
     return (
         <>
-            { user?.role == 'DIRECT' && <DirectPage /> }
-            { user?.role == 'ADMIN' && <AdminPage /> }
-            { user?.role == 'TEACHER' && <TeacherPage /> }
+            { user?.role_id == 1 && <DirectPage /> }
+            { user?.role_id == 2 && <AdminPage /> }
+            { user?.role_id == 3 && <TeacherPage /> }
         </>
     )
 

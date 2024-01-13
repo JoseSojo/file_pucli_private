@@ -37,7 +37,8 @@ class UserController {
     }
 
     async CreateFav(req, res) {
-        const id = req.parmas.id;
+        console.log(req.params);
+        const id = req.params.id;
         const uid = req.user.id;
 
         const DataFav = { user_id: uid, post_id:id };
@@ -111,7 +112,7 @@ class UserController {
     }
 
     async GetAllUser(req, res) {
-        const { role, name, ci, lastname, email } = req.params;
+        const { role, name, ci, lastname, email } = req.query;
 
         if(role) {
             const result = await UserModel.GetUser({ query:{ role:`${role}`} });
@@ -140,6 +141,19 @@ class UserController {
 
         const result = await UserModel.GetUser({ query:{} });
         return res  .status(200).json({ response:'SUCCESS_GET_USER_BY_CI', body:result });
+    }
+
+    async GetAllPost(req, res) {
+        const { description } = req.query;
+
+        const result = await UserModel.GetPost({ query:{} });
+        return res.status(200).json({ response:'SUCCESS_GET_ALL_POST', body:result });
+    }
+
+    async GetAllFavorites(req, res) {
+        const id = req.params.id;
+        const result = await UserModel.GetFavorites({ user_id:id });
+        return res.status(200).json({ response:'SUCCESS_GET_ALL_FAVORITES', body:result });
     }
 }
 

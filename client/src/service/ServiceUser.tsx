@@ -1,5 +1,6 @@
 import { URL } from "../constans.d";
 import { DataFile } from "../types/files";
+import { ResultPost } from "../types/post";
 import { CreateAdmin, User } from "../types/user.d";
 
 class Service {
@@ -99,6 +100,60 @@ class Service {
 
         return json.response as string;  
     }
+
+    async SetFavorite({ _id }: {_id:string}) {
+        const RequestOption = {
+            method: 'PUT',
+            headers: { "token":`${this.GetTokenStorage()}` }
+        }
+        const url = `${URL}user/set/favorite/${_id}`;
+        const result = await fetch(url, RequestOption);
+        const json = result.json();
+
+        if(!result.ok) {
+            const error = await json;
+            return error.response;
+        }
+
+        const success = await json;
+        console.log(success);
+        return success.response;
+    }
+
+    async GetPost({ description }: {description?:string}) {
+        const RequestOption = {
+            headers: {
+                "token":`${this.GetTokenStorage()}`
+            }
+        }
+        const defaultUrl = `${URL}user/get/post`
+        const url = description ? `${defaultUrl}/?description=${description}` : defaultUrl;
+        const result = await fetch(url, RequestOption);
+        if(!result.ok) {
+            return 'DANGER';
+        }
+        const json = await result.json();
+        return json as ResultPost;
+    }
+
+    async GetFavorites({ description }: {description?:string}) {
+        const RequestOption = {
+            headers: {
+                "token":`${this.GetTokenStorage()}`
+            }
+        }
+        const GetUser = this.GetUserStorage();
+        const userId = GetUser ? GetUser._id : '0000000';
+        const defaultUrl = `${URL}user/get/favorites/${userId}`
+        const url = description ? `${defaultUrl}/?description=${description}` : defaultUrl;
+        const result = await fetch(url, RequestOption);
+        if(!result.ok) {
+            return 'DANGER';
+        }
+        const json = await result.json();
+        return json as ResultPost;
+    }
+
 }
 
 const user = new Service();

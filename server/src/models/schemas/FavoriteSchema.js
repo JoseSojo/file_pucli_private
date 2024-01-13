@@ -1,12 +1,12 @@
-import mongoose from 'mongoose';
+import {Schema, model} from 'mongoose';
 
-const favoriteSchema = mongoose.Schema({
+const favoriteSchema = Schema({
     user_id: {
-        type: String,
+        type: Schema.Types.ObjectId,
         require: true
     },
     post_id: {
-        type: String,
+        type: Schema.Types.ObjectId,
         require: true
     },
     date: {
@@ -15,5 +15,5 @@ const favoriteSchema = mongoose.Schema({
     }
 });
 
-export default mongoose.model('favorites', favoriteSchema);
+export default model('favorites', favoriteSchema);
 

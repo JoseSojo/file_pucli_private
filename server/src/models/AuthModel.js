@@ -1,4 +1,4 @@
-import AuthSchema from './schema/AuthSchema.js';
+import AuthSchema from './schemas/AuthSchema.js';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
@@ -27,7 +27,7 @@ class AuthModel {
             const User = await AuthSchema.find({ email:data.email });
             if(!User) return { err: true, error: 'DANGER_EMAIL_NOT_FOUND' };
 
-            const compare = bcrypt.compare(data.password, User[0].password);
+            const compare = await bcrypt.compare(data.password, User[0].password);
             if(!compare) return { err: true, error: 'DANGER_PASSWORD_NOT_FOUND' };
 
             const token = jwt.sign(

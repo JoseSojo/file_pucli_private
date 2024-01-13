@@ -1,6 +1,6 @@
-import mongoose from 'mongoose';
+import {Schema, model} from 'mongoose';
 
-const PostSchema = mongoose.Schema({
+const PostSchema = Schema({
     description: {
         type: String,
         require: true
@@ -10,12 +10,12 @@ const PostSchema = mongoose.Schema({
         require: true
     },
     creathe_by: {
-        type: String,
-        require: true,
+        type: Schema.Types.ObjectId,
+        ref: 'users',
     },
     file_id: {
-        type: String,
-        require: true
+        type: Schema.Types.ObjectId,
+        ref: 'files',
     },
     created_date: {
         type: Date,
@@ -23,4 +23,4 @@ const PostSchema = mongoose.Schema({
     }
 });
 
-export default mongoose.model('Post', PostSchema);
+export default model('Post', PostSchema);
