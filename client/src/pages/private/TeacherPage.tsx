@@ -1,6 +1,4 @@
 import { useState } from "react"
-import { FilesDirect } from "../../components/private/FilesDirect";
-import { PersonalDirect } from "../../components/private/PersonalDirect";
 import { useNotification } from "../../context/NotiContext";
 import { Notification } from "../../components/Notification";
 import ServiceUser from '../../service/ServiceUser';
