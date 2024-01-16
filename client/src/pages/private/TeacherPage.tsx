@@ -9,7 +9,7 @@ import ServiceUser from '../../service/ServiceUser';
 import { LuMegaphone, LuHome, LuArrowDownRightFromCircle } from 'react-icons/lu'
 import { InicioTeacher } from "../../components/private/InicioTeacher";
 
-type PagesPayload = 'INICIO' | 'FILES' | 'PERSONAL'
+type PagesPayload = 'INICIO'
 
 export const TeacherPage = () => {
     const [payload, setPayload] = useState<PagesPayload>('INICIO');
@@ -55,9 +55,7 @@ export const TeacherPage = () => {
             </header>
 
             {
-                  payload == "INICIO" ? <InicioTeacher />
-                : payload == 'FILES'  ? <FilesDirect />
-                : payload == 'PERSONAL'  ? <PersonalDirect />
+                payload == "INICIO" ? <InicioTeacher />
                 : <span>vas a salir</span>
             }
 

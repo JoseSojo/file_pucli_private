@@ -9,7 +9,7 @@ export const InicioTeacher = () => {
 
     return (
         <section className='grid p-5 gap-5 relative min-h-[90vh]'>
-            <div className='relative max-h-[90vh] grid grid-cols-[.5fr_1fr] gap-x-4 grid-rows-[100%] '>
+            <div className='relative max-h-[90vh] grid grid-cols-1 lg:grid-cols-[.5fr_1fr] gap-x-4 grid-rows-[100%] '>
                 <CardFull>
                     <FormUploadFile />  
                 </CardFull>
