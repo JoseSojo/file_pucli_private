@@ -6,17 +6,16 @@ import ServiceUser from '../../service/ServiceUser';
 import { useNotification } from "../../context/NotiContext";
 
 interface Props {
+    update: () => void,
     post: Post,
     favorite: boolean
 }
 
-export const CardFiles: FC<Props> = ({ post,favorite }) => {
+export const CardFiles: FC<Props> = ({ post,favorite, update }) => {
     const noti = useNotification();
-
     const file = post.file_reference[0];
     const url = `${URL}storage/${file.save_name}`;
     const clsButton = 'h-full w-[120px] rounded-md border-2 text-bold hover:text-white duration-200 font-bold text-sm flex justify-center items-center ';
-    //alert(post.creathe_by)
     const mathcImg = file.type.includes('image') ?true :false;
 
     const HandleClickSetFavorite = ({ _id }: {_id:string}) => {
@@ -24,6 +23,7 @@ export const CardFiles: FC<Props> = ({ post,favorite }) => {
             const response = await ServiceUser.SetFavorite({_id});
             if(response === 'SUCCESS_FAVORITE_CREATE') noti.setNotification({type:'SUCCESS',status:true,message:'agregado a favoritos'});
             if(response === 'SUCCESS_FAVORITE_DELETE') noti.setNotification({type:'SUCCESS',status:true,message:'eliminado de favoritos'});
+            update();
         }
         SetFavorite();
     }
@@ -44,7 +44,10 @@ export const CardFiles: FC<Props> = ({ post,favorite }) => {
                 <a href={url} target="_blank" className={`${clsButton} border-emerald-500 text-emerald-500 hover:bg-emerald-500`}>
                     VER
                 </a>
-                <button onClick={()=>HandleClickSetFavorite({_id:post._id})} className={`${clsButton} border-amber-500 text-amber-500 hover:bg-amber-500`}>
+                <button 
+                    onClick={()=>HandleClickSetFavorite({_id:post._id})}
+                    className={`${clsButton} border-amber-500 text-amber-500 hover:bg-amber-500`}
+                >
                     {
                         favorite
                         ?'DESCARTAR'
@@ -53,5 +56,5 @@ export const CardFiles: FC<Props> = ({ post,favorite }) => {
                 </button>
             </footer>
         </aside>
-    )
+    );
 }

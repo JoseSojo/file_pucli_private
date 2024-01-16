@@ -12,7 +12,7 @@ export const FormUploadFile = () => {
     const [load, setLoad] = useState(false);
 
     const [description, setDescription] = useState('');
-    const [type, setType] = useState<string>('PUBLIC');
+    const [type, setType] = useState<string>('PRIVATE');
     const [file, setFile] = useState<File|null>(null);
     const [dataFile, setDataFile] = useState<DataFile | null>(null);
 
@@ -27,14 +27,13 @@ export const FormUploadFile = () => {
                 if(type == '') return setError({ ubication:'input.type', error:'debes llenar este campo' });
 
                 const response = await ServiceUser.CreatePost({ file:dataFile, description, type_post:type });
-                if(response === 'SUCCESS_CREATE_POST') noti.setNotification({ status:true,type:'SUCCESS',message:'publicación creada' });
+                if(response === 'SUCCESS_CREATE_POST') return noti.setNotification({ status:true,type:'SUCCESS',message:'publicación creada' });
                 noti.setNotification({ status:true,type:'DANGER',message:'error temporal' });
 
                 setDataFile(null);
                 setType('');
                 setDescription('');
-                setFile(null);
-
+                return setFile(null);
             }
             else {
                 if(!file) return setError({ ubication:'input.file', error:'debes seleccionar un archivo' });

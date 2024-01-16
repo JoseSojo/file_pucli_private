@@ -4,24 +4,53 @@ import { FilesDirect } from "../../components/private/FilesDirect";
 import { PersonalDirect } from "../../components/private/PersonalDirect";
 import { useNotification } from "../../context/NotiContext";
 import { Notification } from "../../components/Notification";
+import ServiceUser from '../../service/ServiceUser';
+
+// icons
+import { LuMegaphone, LuHome, LuArrowDownRightFromCircle } from 'react-icons/lu'
 
 type PagesPayload = 'INICIO' | 'FILES' | 'PERSONAL'
 
 export const DirectPage = () => {
     const [payload, setPayload] = useState<PagesPayload>('INICIO');
     const noti = useNotification();
-    console.log(noti.notification.status);
+    const user = ServiceUser.GetUserStorage();
+    const clsLi = 'font-bold text-xl text-white font-mono list-none p-6 hover:bg-amber-300 duration-200';
 
     return (
         <>
             { noti.notification.status && <Notification /> }
-            <header className='w-full px-10 bg-amber-300 flex justify-between items-center'>
-                <h1 className='text-2xl font-bold'>Juan German Roscio</h1>
+            <header className='w-full px-10 bg-amber-500 flex justify-between items-center'>
+                <h1 
+                    style={{
+                        textShadow: '1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000'
+                    }}
+                    className='text-2xl font-bold text-white'
+                >
+                    Director: {user?.ci}
+                </h1>
 
                 <ul className='flex'>
-                    <li onClick={()=> setPayload('INICIO')} className='font-bold text-sm font-mono list-none p-6 hover:bg-amber-500 duration-200'>inicio</li>
-                    <li onClick={()=> setPayload('FILES')} className='font-bold text-sm font-mono list-none p-6 hover:bg-amber-500 duration-200'>archivos</li>
-                    <li onClick={()=> setPayload('PERSONAL')} className='font-bold text-sm font-mono list-none p-6 hover:bg-amber-500 duration-200'>personal</li>
+                    <li
+                        onClick={()=>{}}
+                        className={clsLi}
+                    >
+                        <LuMegaphone />
+                    </li>
+                    <li 
+                        onClick={()=> setPayload('INICIO')} 
+                        className={clsLi}
+                    >
+                        <LuHome />
+                    </li>
+                    <li onClick={()=> {
+                        ServiceUser.RemoveUserAndTokenStorage();
+                        window.location.reload();
+                    }} className={clsLi}
+                    >
+                        <LuArrowDownRightFromCircle />
+                    </li>
+
                 </ul>
             </header>
 

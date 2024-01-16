@@ -21,6 +21,11 @@ class Service {
         return JSON.parse(`${window.localStorage.getItem('user')}`) as User|null;
     }
 
+    RemoveUserAndTokenStorage() {
+        window.localStorage.removeItem('user');
+        window.localStorage.removeItem('token');
+    }
+
     async CreateTeacher({data}:{data:CreateAdmin}): Promise<string> {
         const RequestOptions = {
             method: 'POST',
@@ -152,6 +157,19 @@ class Service {
         }
         const json = await result.json();
         return json as ResultPost;
+    }
+
+    async GetAllUsers() {
+        const RequestOption = {
+            headers: {
+                "token":`${this.GetTokenStorage()}`
+            }
+        }
+        const url = `${URL}user/get/user`;
+        const result = await fetch(url, RequestOption);
+        if(!result.ok) return 'error';
+
+        return await result.json();
     }
 
 }

@@ -45,7 +45,6 @@ export const FormCreatePeople = () => {
             } else {
                 const response = await ServiceUser.CreateTeacher({ data });
 
-                console.log(response);
                 if(response !== 'SUCCESS_CREATE_TEACHER') {
                     noti.setNotification({ status:true, type:'DANGER', message:'verifica los datos' });
                     if(response === 'DANGER_EMAIL_IN_USE') setError({  ubication:'input.email', error:'correo en uso' });

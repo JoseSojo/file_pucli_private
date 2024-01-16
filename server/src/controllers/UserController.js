@@ -114,7 +114,7 @@ class UserController {
     async GetAllUser(req, res) {
         const { role, name, ci, lastname, email } = req.query;
 
-        if(role) {
+        /*if(role) {
             const result = await UserModel.GetUser({ query:{ role:`${role}`} });
             return res  .status(200).json({ response:'SUCCESS_GET_USER_BY_ROLE', body:result });
         }
@@ -137,10 +137,10 @@ class UserController {
         if(ci) {
             const result = await UserModel.GetUser({ query:{ ci:{$regex:`/^${ci}/`} } });
             return res  .status(200).json({ response:'SUCCESS_GET_USER_BY_CI', body:result });
-        }
+        }*/
 
         const result = await UserModel.GetUser({ query:{} });
-        return res  .status(200).json({ response:'SUCCESS_GET_USER_BY_CI', body:result });
+        return res  .status(200).json({ response:'SUCCESS_GET_ALL_USER', body:result });
     }
 
     async GetAllPost(req, res) {

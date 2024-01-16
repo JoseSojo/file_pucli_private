@@ -8,7 +8,7 @@ interface Props {
     placeholder: string,
     value: string | number,
     error: string | null,
-    load?: string | null
+    load?: string | null | boolean
 }
 
 export const InputDefine: FC<Props> = ({ change, type, placeholder, value, error, load }) => {

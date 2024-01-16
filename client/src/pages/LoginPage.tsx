@@ -26,7 +26,8 @@ export const LoginPage = () => {
             const data = { email, password };
             const response = await ServiceAuth.Login({ data });
             if(!response) {
-                noti.setNotification({ status:true, type:'DANGER', message:'Error temporal' });
+                setLoad(null);
+                return noti.setNotification({ status:true, type:'DANGER', message:'Error temporal' });
             }
 
             setEmail('');
