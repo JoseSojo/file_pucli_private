@@ -1,5 +1,6 @@
 import { URL } from "../constans.d";
 import { DataFile } from "../types/files";
+import { CreateNoti } from "../types/notifications.d";
 import { ResultPost } from "../types/post";
 import { CreateAdmin, User } from "../types/user.d";
 
@@ -170,6 +171,40 @@ class Service {
         if(!result.ok) return 'error';
 
         return await result.json();
+    }
+
+    async CreateNotification({ data }: {data:CreateNoti}) {
+        const RequestOption = {
+            method: 'POST',
+            headers: { 
+                "Content-Type":"application/json",
+                "token":`${this.GetTokenStorage()}` 
+            },
+            body: JSON.stringify(data)
+        }
+        const url = `${URL}user/create/notification`;
+        const result = await fetch(url, RequestOption);
+        const json = result.json();
+        if(!result.ok) {
+            console.log(await json);
+            return 'error';
+        }
+        return await json;
+    }
+
+    async GetAllNotification() {
+        const RequestOption = {
+            method: 'GET',
+            headers: { "token":`${this.GetTokenStorage()}` }
+        }
+        const url = `${URL}user/get/notifications`;
+        const result = await fetch(url, RequestOption);
+        const json = result.json();
+        if(!result.ok) {
+            console.log(await json);
+            return 'error';
+        }
+        return await json;
     }
 
 }

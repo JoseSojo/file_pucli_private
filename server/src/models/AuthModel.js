@@ -18,7 +18,6 @@ class AuthModel {
             data.password = await bcrypt.hash(data.password, 9);
             const newSchema = new AuthSchema(data);
             const result = await newSchema.save();
-            console.log(result);
 
             return result;
         }

@@ -8,6 +8,7 @@ import { Connect } from './config/connect.js';
 // CONTROLLERS
 import ControllerAuth from './controllers/AuthController.js';
 import ControllerUser from './controllers/UserController.js';
+import ControllerNotification from './controllers/NotificationController.js';
 
 import { ValidToken } from './middlewares/session.js';
 import MulterMiddleware from './middlewares/file.js';
@@ -31,10 +32,12 @@ app.post('/user/create/file', ValidToken, MulterMiddleware.single('file'), Contr
 app.post('/user/create/post', ValidToken, ControllerUser.CreatePost);
 app.post('/user/create/admin', ValidToken, ControllerUser.CreateAdmin);
 app.post('/user/create/teacher', ValidToken, ControllerUser.CreateTeacher);
+app.post('/user/create/notification', ValidToken, ControllerNotification.CreateNotification);
 
-app.get('/user/get/user', ValidToken, ControllerUser.GetAllUser)
-app.get('/user/get/post', ValidToken, ControllerUser.GetAllPost)
-app.get('/user/get/favorites/:id', ValidToken, ControllerUser.GetAllFavorites)
+app.get('/user/get/user', ValidToken, ControllerUser.GetAllUser);
+app.get('/user/get/post', ValidToken, ControllerUser.GetAllPost);
+app.get('/user/get/favorites/:id', ValidToken, ControllerUser.GetAllFavorites);
+app.get('/user/get/notifications', ValidToken, ControllerNotification.GettingAllNotifications);
 
 app.put('/user/update/password', ValidToken, ControllerUser.UpdatePassword);
 app.put('/user/update/data', ValidToken, ControllerUser.UpdateData);

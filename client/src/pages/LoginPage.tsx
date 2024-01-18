@@ -1,7 +1,6 @@
 import { FormEvent, useState } from "react";
 import { CardBasic } from "../components/CardBasic";
 import { InputDefine } from "../components/InputGlobal";
-import { OpacityText } from "../components/text/OpacityText";
 import { useNotification } from "../context/NotiContext";
 import { Navigate } from '../hooks/useNavigate';
 
@@ -82,10 +81,10 @@ export const LoginPage = () => {
                             }
                         </button>
                     </form>
-                    <aside className='grid place-items-center'>
+                    {/*<aside className='grid place-items-center'>
                         <OpacityText text='¿No tienes cuenta?' />
                         <p className='text-lg font-medium text-blue-700'>Contacta a un administrador</p>
-                    </aside>
+                    </aside>*/}
 
                 </CardBasic>
             </div>

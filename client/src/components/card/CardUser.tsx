@@ -3,15 +3,15 @@ import { User } from "../../types/user";
 import { TitleText } from "../text/TitleText";
 import { OpacityText } from "../text/OpacityText";
 import { InputDefine } from "../InputGlobal";
-//import { useNotification } from "../../context/NotiContext";
-//import ServiceUser from '../../service/ServiceUser';
+import { useNotification } from "../../context/NotiContext";
+import ServiceUser from '../../service/ServiceUser';
 
 interface Props {
     user: User
 }
 
 export const CardUser: FC<Props> = ({ user }) => {
-    // const noti = useNotification();
+    const noti = useNotification();
 
     const [modal, setModal] = useState(false);
     const [load, setLoad] = useState(false);
@@ -28,21 +28,20 @@ export const CardUser: FC<Props> = ({ user }) => {
 
             if(asunto === '') return setError({ubication:'input.asunto',error:'Debes completar este campo'});
             if(message === '') return setError({ubication:'input.message',error:'Debes completar este campo'});
-            // const data = {asunto, message};
-            /*
-            const response = await ServiceUser.NotifyUser({ data });
+            const data = {asunto, message, user_id:user._id};
+            
+            const response = await ServiceUser.CreateNotification({ data });
             
             if(response === false) {
-                setError();
                 noti.setNotification({ status:true, type:'DANGER', message:`error al notificado.` })
             }
 
+            setAsunto('');
+            setMessage('');
+            setModal(false);
             noti.setNotification({ status:true, type:'SUCCESS', message:`${user.name} ${user.lastname} notificado.` })
             setLoad(false);
             setError(null);
-
-
-            */
 
         }
 
