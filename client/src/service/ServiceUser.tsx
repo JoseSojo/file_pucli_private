@@ -1,7 +1,7 @@
 import { URL } from "../constans.d";
 import { DataFile } from "../types/files";
 import { CreateNoti } from "../types/notifications.d";
-import { ResultPost } from "../types/post";
+import { ResultPost, ResultFavorite } from "../types/post";
 import { CreateAdmin, User } from "../types/user.d";
 
 class Service {
@@ -157,7 +157,7 @@ class Service {
             return 'DANGER';
         }
         const json = await result.json();
-        return json as ResultPost;
+        return json as ResultFavorite;
     }
 
     async GetAllUsers() {

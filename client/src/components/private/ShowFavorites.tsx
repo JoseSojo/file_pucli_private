@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { Post } from "../../types/post.d";
+import { BodyFavorite } from "../../types/post.d";
 import { CardFiles } from "../card/CardFiles";
 import UserService from '../../service/ServiceUser';
 import { TitleText } from "../text/TitleText";
 
 export const ShowFavorites = () => {
-    const [postList, setPostList] = useState<Post[] | null>(null);
+    const [postList, setPostList] = useState<BodyFavorite[] | null>(null);
     const [error, setError] = useState(false);
     const [load, setLoad] = useState(true);
     const [reload, setReload] = useState(false);
@@ -18,7 +18,10 @@ export const ShowFavorites = () => {
                 setLoad(false);
                 return setError(true);
             };
-            setPostList(response.body);
+            if(response.body.length > 0 && response.body[0] !== null){
+                console.log(response.body);
+                setPostList(response.body);
+            }
             setLoad(false);
             setError(false);
             return;
@@ -38,7 +41,9 @@ export const ShowFavorites = () => {
                     :  postList
                     ?  <>
                         {
-                            postList.map((item) => ( <CardFiles update={()=>setReload(!reload)} favorite={false} key={item._id} post={item} /> ))
+                            postList && postList.length > 0 && postList[0].post_reference.map((item) => (
+                                <CardFiles update={()=>setReload(!reload)} favorite={false} key={item._id} post={item} /> 
+                            ))
                         }
                        </>
                     : <>

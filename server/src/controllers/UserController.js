@@ -23,16 +23,14 @@ class UserController {
     async CreatePost(req, res) {
         const {originalname, type, size, save_name, description, type_post} = req.body;
 
-        const DataFile = { originalname, type, size, save_name };
-        const resultFile = await UserModel.CreateFile({ data:DataFile });
-
-        const DataPost = { description, type_post, creathe_by:req.user.id, file_id:resultFile._id }
+        const DataPost = { description, type_post, creathe_by:req.user.id, file_originalname:originalname, file_type:type, file_size:size, file_save_name:save_name }
         const resultPost = await UserModel.CreatePost({ data: DataPost })
 
         return res 
             .status(200)
             .json({
-                response:'SUCCESS_CREATE_POST'
+                response:'SUCCESS_CREATE_POST',
+                body: resultPost
             })
     }
 
@@ -114,31 +112,6 @@ class UserController {
     async GetAllUser(req, res) {
         const { role, name, ci, lastname, email } = req.query;
 
-        /*if(role) {
-            const result = await UserModel.GetUser({ query:{ role:`${role}`} });
-            return res  .status(200).json({ response:'SUCCESS_GET_USER_BY_ROLE', body:result });
-        }
-
-        if(name) {
-            const result = await UserModel.GetUser({ query:{ name:{$regex:`/^${name}/`} } });
-            return res  .status(200).json({ response:'SUCCESS_GET_USER_BY_NAME', body:result });
-        }
-
-        if(lastname) {
-            const result = await UserModel.GetUser({ query:{ lastname:{$regex:`/^${lastname}/`} } });
-            return res  .status(200).json({ response:'SUCCESS_GET_USER_BY_LASTNAME', body:result });
-        }
-
-        if(email) {
-            const result = await UserModel.GetUser({ query:{ email:{$regex:`/^${email}/`} } });
-            return res  .status(200).json({ response:'SUCCESS_GET_USER_BY_EMAIL', body:result });
-        }
-
-        if(ci) {
-            const result = await UserModel.GetUser({ query:{ ci:{$regex:`/^${ci}/`} } });
-            return res  .status(200).json({ response:'SUCCESS_GET_USER_BY_CI', body:result });
-        }*/
-
         const result = await UserModel.GetUser({ query:{} });
         return res  .status(200).json({ response:'SUCCESS_GET_ALL_USER', body:result });
     }
@@ -151,7 +124,7 @@ class UserController {
     }
 
     async GetAllFavorites(req, res) {
-        const id = req.params.id;
+        const id = req.user.id;
         const result = await UserModel.GetFavorites({ user_id:id });
         return res.status(200).json({ response:'SUCCESS_GET_ALL_FAVORITES', body:result });
     }

@@ -2,7 +2,7 @@ import { FC, ReactNode } from "react";
 import { useNotification } from "../context/NotiContext";
 import { Notification } from "../components/Notification";
 import { useAuth } from "../context/AuthContext";
-import { HeaderOffLogin } from "../components/headers/HeaderOffLogin";
+// import { HeaderOffLogin } from "../components/headers/HeaderOffLogin";
 import { HeaderOnLogin } from "../components/headers/HeadersOnSession";
 
 interface Props {
@@ -20,7 +20,7 @@ export const Layout: FC<Props> = ({ children }) => {
                 {
                     auth.session === true
                     ? <HeaderOnLogin />
-                    : <HeaderOffLogin />
+                    : <></>
                 }
                 <main className='h-[100%]'>
                     { children }

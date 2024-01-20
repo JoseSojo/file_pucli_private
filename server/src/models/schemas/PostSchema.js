@@ -13,13 +13,25 @@ const PostSchema = Schema({
         type: Schema.Types.ObjectId,
         ref: 'users',
     },
-    file_id: {
-        type: Schema.Types.ObjectId,
-        ref: 'files',
-    },
     created_date: {
         type: Date,
         default: Date.now
+    },
+    file_originalname: {
+        type: String,
+        require: true
+    },
+    file_size: {
+        type: Number,
+        require: true
+    },
+    file_save_name: {
+        type: String,
+        require: true,
+    },
+    file_type: {
+        type: String,
+        require: true
     }
 });
 

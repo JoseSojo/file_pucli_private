@@ -3,6 +3,7 @@ import FileSchema from "./schemas/FileSchema.js";
 import PostSchema from "./schemas/PostSchema.js";
 import AuthSchema from "./schemas/AuthSchema.js";
 import FavoriteSchema from "./schemas/FavoriteSchema.js";
+import mongoose from 'mongoose';
 
 class UserModel {
     async CreateFile({ data }) {
@@ -39,9 +40,7 @@ class UserModel {
     }
 
     async GetPost({ query }) {
-        const posts = await PostSchema.aggregate([
-            {$lookup: { from:'files',localField:'file_id',foreignField:'_id',as:'file_reference' }}
-        ]);
+        const posts = await PostSchema.find();
         // const posts = await PostSchema.find().populate('file_id')
         if(!posts) return null;
         return posts;
@@ -49,7 +48,7 @@ class UserModel {
 
     async GetPostById({ _id }) {
         const post = await PostSchema.aggregate([
-            {$lookup: { from:'files',localField:'file_id',foreignField:'_id',as:'file_reference' }},
+            {$lookup: { from:'users',localField:'creathe_by',foreignField:'_id',as:'file_reference' }},
             {$match:{_id:_id}},
             {$limit: 1}
         ]);
@@ -58,16 +57,21 @@ class UserModel {
     }
 
     async GetFavorites({ user_id }) {
-        const favorites = await FavoriteSchema.find({ user_id });
+        console.log(user_id);
+        /*const favorites = await PostSchema.aggregate([
+            {$match:{ creathe_by: new mongoose.Types.ObjectId(user_id) }},
+            {$lookup: { from:'favorites',localField:'_id',foreignField:'post_id',as:'favorite' }}
+        ]);*/
+        const favorites = await FavoriteSchema.aggregate([
+            { $match:{ user_id: new mongoose.Types.ObjectId(user_id) } },
+            {$lookup: { from:'posts',localField:'post_id',foreignField:'_id',as:'post_reference' }}
+        ])
+
         if(!favorites) return null;
-        const AllPost = [];
 
-        for (let i = 0; i < favorites.length; i++) {
-            const result = await this.GetPostById({ _id:favorites[i].post_id });
-            AllPost.push(result[0]);         
-        }
+        console.log(favorites);
 
-        return AllPost;
+        return favorites;
     }
 
     async UpdatePassword({ data, id }) {
