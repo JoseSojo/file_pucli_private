@@ -13,7 +13,7 @@ export const IndexPage = () => {
     return (
         <>
             <header 
-                className='grid grid-cols-1 lg:grid-cols-2 place-items-center h-screen' 
+                className='grid grid-cols-1 lg:grid-cols-2 place-items-center h-screen p-5 lg:p-10' 
                 style={{
                     backgroundImage: `url(${IMG3})`,
                     backgroundSize: '100%',
@@ -39,7 +39,7 @@ export const IndexPage = () => {
                 <section className='grid w-[90%] md:w-[70%] place-items-center min-h-screen'>
                     <div className='grid grid-cols-1 lg:grid-cols-[.75fr_1fr] w-full'>
                         <img src={IMG1} className='w-full h-[450px] object-cover rounded-[50%_50%_0_0] lg:rounded-[50%_0_0_50%]' />
-                        <div className='bg-white lg:rounded-r-xl shadow w-full h-[450px] p-5 lg:p-10 flex justify-center items-center flex-col'>
+                        <div className='bg-white lg:rounded-r-xl shadow w-full min-h-[450px] p-5 lg:p-10 flex justify-center items-center flex-col'>
                             <TitleText text='Info de la institucion' />
                             <p className='text-md text-gray-800 mt-5'>
                                 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nesciunt, dolorem distinctio non 
@@ -99,9 +99,9 @@ export const IndexPage = () => {
                 </section>
 
                 <section className='grid w-[90%] md:w-[70%] place-items-center min-h-screen'>
-                    <div className='grid grid-cols-1 lg:grid-cols-[.75fr_1fr] w-full'>
+                    <div className='grid grid-cols-1 lg:grid-cols-[.75fr_1fr] w-full h-auto'>
                         <img src={IMG3} className='w-full h-[450px] object-cover rounded-[50%_50%_0_0] lg:rounded-[50%_0_0_50%]' />
-                        <div className='bg-white lg:rounded-r-xl shadow w-full h-[450px] p-5 lg:p-10 flex justify-center items-center flex-col'>
+                        <div className='bg-white lg:rounded-r-xl shadow w-full min-h-[450px] p-5 lg:p-10 flex justify-center items-center flex-col'>
                             <h3 className='font-bebas text-6xl text-gray-700'>Reseña Histórica</h3>
                             
                             <p className='text-md text-gray-800 mt-5'>
