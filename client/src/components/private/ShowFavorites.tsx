@@ -18,8 +18,7 @@ export const ShowFavorites = () => {
                 setLoad(false);
                 return setError(true);
             };
-            if(response.body.length > 0 && response.body[0] !== null){
-                console.log(response.body);
+            if(response.body.length > 0 && response.body[0] !== null) {
                 setPostList(response.body);
             }
             setLoad(false);
@@ -41,8 +40,9 @@ export const ShowFavorites = () => {
                     :  postList
                     ?  <>
                         {
-                            postList && postList.length > 0 && postList[0].post_reference.map((item) => (
-                                <CardFiles update={()=>setReload(!reload)} favorite={false} key={item._id} post={item} /> 
+                            postList && postList.length > 0 && postList.map((p) => (
+                                    <CardFiles update={()=>setReload(!reload)} favorite={false} key={p._id} post={p.post_reference[0]} /> 
+                
                             ))
                         }
                        </>
