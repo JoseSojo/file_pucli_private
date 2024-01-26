@@ -2,6 +2,7 @@ import express from 'express';
 import morgan from 'morgan';
 import path from 'path';
 import cors from 'cors';
+import fs from 'fs';
 
 import { Connect } from './config/connect.js'; 
 
@@ -45,6 +46,14 @@ app.put('/user/update/data', ValidToken, ControllerUser.UpdateData);
 app.put('/user/set/favorite/:id', ValidToken, ControllerUser.CreateFav);
 
 // STATIC
-app.use('/storage', express.static(path.join(process.cwd(), 'src/storage')));
+const dir = path.join(process.cwd(), 'src/storage');
+console.log(dir);
+const Files = async () => {
+    const files = await fs.promises.readdir(dir)
+    console.log(files);
+}
+Files();
+
+app.use('/storage', express.static(dir));
 
 app.listen(PORT, ()=> { console.log('SERVER RUNNING') })
