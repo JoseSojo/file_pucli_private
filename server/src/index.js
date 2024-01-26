@@ -48,14 +48,14 @@ app.put('/user/set/favorite/:id', ValidToken, ControllerUser.CreateFav);
 // STATIC
 const dir = path.join(process.cwd(), 'src/storage');
 
-console.log(`
-    => PATH ${process.cwd()}
-    => SRC ${'src/storage'}
-
-`)
-
 app.use('/storage', express.static(dir));
 
 app.listen(PORT, ()=> { 
-    console.log('SERVER RUNNING');
+    console.log(`
+        SERVER_RUNNING 
+        => PORT ${PORT}
+        => PATH ${process.cwd()}
+        => SRC ${'src/storage'}
+
+    `)
 })
