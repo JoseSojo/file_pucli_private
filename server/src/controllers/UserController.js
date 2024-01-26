@@ -128,6 +128,11 @@ class UserController {
         const result = await UserModel.GetFavorites({ user_id:id });
         return res.status(200).json({ response:'SUCCESS_GET_ALL_FAVORITES', body:result });
     }
+
+    async GetPublic(req, res) {
+        const result = await UserModel.GetPublicPost();
+        return res.status(200).json({ response:'SUCCESS_GET_PUBLIC_POST', body:result });
+    }
 }
 
 const user = new UserController();

@@ -69,8 +69,6 @@ class UserModel {
 
         if(!favorites) return null;
 
-        console.log(favorites);
-
         return favorites;
     }
 
@@ -88,6 +86,13 @@ class UserModel {
     async UpdateData({ data, id }) {        
         await AuthSchema.findByIdAndUpdate(id, { $set:data });
         return true;
+    }
+
+    async GetPublicPost() {
+        const posts = await PostSchema.find({ type_post: 'PUBLIC' });
+        // const posts = await PostSchema.find().populate('file_id')
+        if(!posts) return null;
+        return posts;
     }
 }
 

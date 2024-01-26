@@ -207,6 +207,21 @@ class Service {
         return await json;
     }
 
+    async GetPublics() {
+        const RequestOption = {
+            headers: {
+                "token":`${this.GetTokenStorage()}`
+            }
+        }
+        const url = `${URL}user/get/post/public`
+        const result = await fetch(url, RequestOption);
+        if(!result.ok) {
+            return 'DANGER';
+        }
+        const json = await result.json();
+        return json as ResultPost;
+    }
+
 }
 
 const user = new Service();

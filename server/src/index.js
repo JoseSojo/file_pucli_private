@@ -38,6 +38,7 @@ app.get('/user/get/user', ValidToken, ControllerUser.GetAllUser);
 app.get('/user/get/post', ValidToken, ControllerUser.GetAllPost);
 app.get('/user/get/favorites/:id', ValidToken, ControllerUser.GetAllFavorites);
 app.get('/user/get/notifications', ValidToken, ControllerNotification.GettingAllNotifications);
+app.get('/user/get/post/public', ControllerUser.GetPublic);
 
 app.put('/user/update/password', ValidToken, ControllerUser.UpdatePassword);
 app.put('/user/update/data', ValidToken, ControllerUser.UpdateData);
