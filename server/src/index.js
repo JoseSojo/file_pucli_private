@@ -47,13 +47,15 @@ app.put('/user/set/favorite/:id', ValidToken, ControllerUser.CreateFav);
 
 // STATIC
 const dir = path.join(process.cwd(), 'storage');
-console.log(dir);
-const Files = async () => {
-    const files = await fs.promises.readdir(dir)
-    console.log(files);
-}
-Files();
 
 app.use('/storage', express.static(dir));
 
-app.listen(PORT, ()=> { console.log('SERVER RUNNING') })
+app.listen(PORT, ()=> { 
+    console.log('SERVER RUNNING');
+    console.log(dir);
+    const Files = async () => {
+        const files = await fs.promises.readdir(dir)
+        console.log(files);
+    }
+    Files();
+})
