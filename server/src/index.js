@@ -53,9 +53,6 @@ app.use('/storage', express.static(dir));
 app.listen(PORT, ()=> { 
     console.log('SERVER RUNNING');
     console.log(dir);
-    const Files = async () => {
-        const files = await fs.promises.readdir(dir)
-        console.log(files);
-    }
-    Files();
+    const files = fs.readdirSync(dir);
+    console.log(files);
 })
