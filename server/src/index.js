@@ -46,7 +46,7 @@ app.put('/user/update/data', ValidToken, ControllerUser.UpdateData);
 app.put('/user/set/favorite/:id', ValidToken, ControllerUser.CreateFav);
 
 // STATIC
-const dir = path.join(process.cwd(), 'storage');
+const dir = path.join(process.cwd(), 'src/storage');
 
 console.log(`
     => PATH ${process.cwd()}
